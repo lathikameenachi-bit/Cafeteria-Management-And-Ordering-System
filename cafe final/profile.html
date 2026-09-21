@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Lumina Bite</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Lumina Bite" class="logo-img">
+                <span>Lumina Bite</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="orders.html">My Orders</a></li>
+                <li><a href="reservation.html">Table Reservation</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="cart-icon">
+                <a href="cart.html">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <section class="profile-page">
+        <div class="container">
+            <h1 class="page-title">My Profile</h1>
+            <div class="profile-container" id="profileContainer">
+                <!-- Populated by JS -->
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <i class="fas fa-user-circle"></i>
+                        <h2 id="displayFullName">Guest</h2>
+                        <p id="displayUsername">@guest</p>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <label>Email Address</label>
+                            <p id="displayEmail">Not logged in</p>
+                        </div>
+                        <div class="detail-item">
+                            <label>Member Since</label>
+                            <p>March 2026</p>
+                        </div>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="btn btn-primary" onclick="window.location.href='index.html'">Back to Home</button>
+                        <button class="btn btn-danger" onclick="logoutUser()">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Lumina Bite</h3>
+                    <p>Your favorite place for coffee and good food</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Lumina Bite. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(localStorage.getItem('cafeQoderUser'));
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            document.getElementById('displayFullName').textContent = user.fullName;
+            document.getElementById('displayUsername').textContent = '@' + user.username;
+            document.getElementById('displayEmail').textContent = user.email;
+        });
+    </script>
+</body>
+</html>

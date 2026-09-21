@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Lumina Bite</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-body">
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Lumina Bite" class="logo-img">
+                <span>Lumina Bite</span>
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="#dashboard" class="active" onclick="showSection('dashboard')">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#reservations" onclick="showSection('reservations')">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Reservations</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#orders" onclick="showSection('orders')">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#menu" onclick="showSection('menu')">
+                        <i class="fas fa-utensils"></i>
+                        <span>Menu Management</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html">
+                        <i class="fas fa-home"></i>
+                        <span>Back to Site</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Admin Main Content -->
+    <main class="admin-main">
+        <!-- Top Header -->
+        <header class="admin-header">
+            <h1>Admin Dashboard</h1>
+            <div class="admin-profile">
+                <span>Welcome, Admin</span>
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </header>
+
+        <!-- Dashboard Section -->
+        <section class="admin-section active" id="dashboard">
+            <h2 class="section-title">Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalReservations">0</h3>
+                        <p>Total Reservations</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalOrders">0</h3>
+                        <p>Total Orders</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalRevenue">₹0.00</h3>
+                        <p>Total Revenue</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalMenuItems">18</h3>
+                        <p>Menu Items</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-recent">
+                <div class="recent-section">
+                    <h3>Recent Reservations</h3>
+                    <div class="recent-list" id="recentReservations">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="recent-section">
+                    <h3>Recent Orders</h3>
+                    <div class="recent-list" id="recentOrders">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reservations Section -->
+        <section class="admin-section" id="reservations">
+            <h2 class="section-title">All Reservations</h2>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Phone</th>
+                            <th>Section</th>
+                            <th>Persons</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reservationsTableBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Orders Section -->
+        <section class="admin-section" id="orders">
+            <h2 class="section-title">All Orders</h2>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Table</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>Arrival Time</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Menu Management Section -->
+        <section class="admin-section" id="menu">
+            <h2 class="section-title">Menu Management</h2>
+            <div class="menu-management">
+                <div class="add-item-form">
+                    <h3>Add/Edit Menu Item</h3>
+                    <form id="menuItemForm">
+                        <input type="hidden" id="editItemId">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="itemName">Item Name</label>
+                                <input type="text" id="itemName" required placeholder="Enter item name">
+                            </div>
+                            <div class="form-group">
+                                <label for="itemPrice">Price (₹)</label>
+                                <input type="number" id="itemPrice" step="0.01" required placeholder="Enter price">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="itemCategory">Category</label>
+                                <select id="itemCategory" required>
+                                    <option value="starters">Starters</option>
+                                    <option value="beverages">Beverages</option>
+                                    <option value="desserts">Desserts</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="itemDescription">Description</label>
+                                <input type="text" id="itemDescription" placeholder="Enter description">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="itemImage">Image URL</label>
+                                <input type="text" id="itemImage" placeholder="Enter Unsplash image URL">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Item
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="resetMenuForm()">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="menu-items-list">
+                    <h3>Current Menu Items</h3>
+                    <div class="category-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="starters">Starters</button>
+                        <button class="filter-btn" data-filter="beverages">Beverages</button>
+                        <button class="filter-btn" data-filter="desserts">Desserts</button>
+                    </div>
+                    <div class="admin-menu-grid" id="adminMenuGrid">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

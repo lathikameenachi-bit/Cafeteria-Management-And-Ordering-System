@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - Lumina Bite</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Lumina Bite" class="logo-img">
+                <span>Lumina Bite</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="orders.html">My Orders</a></li>
+                <li><a href="reservation.html">Table Reservation</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="cart-icon">
+                <a href="cart.html">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Section -->
+    <section class="cart-page">
+        <div class="container">
+            <h1 class="page-title">Your Cart</h1>
+            
+            <div class="cart-container">
+                <!-- Cart Items -->
+                <div class="cart-items-section">
+                    <div id="cartItems">
+                        <!-- Cart items will be populated by JavaScript -->
+                    </div>
+                    <div class="empty-cart" id="emptyCart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h2>Your cart is empty</h2>
+                        <p>Browse our menu and add some delicious items!</p>
+                        <a href="menu.html" class="btn btn-primary">Browse Menu</a>
+                    </div>
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="cart-summary-section" id="cartSummary">
+                    <h2>Order Summary</h2>
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal">₹0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (8%)</span>
+                            <span id="tax">₹0.00</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span id="total">₹0.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="order-details-form" style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">
+                        <h3>Order Details</h3>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label for="orderCustomerName" style="display: block; margin-bottom: 5px; font-weight: 500;">Customer Name</label>
+                            <input type="text" id="orderCustomerName" required placeholder="Enter your name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                        </div>
+                        <div class="form-row" style="display: flex; gap: 10px; margin-bottom: 15px;">
+                            <div class="form-group" style="flex: 1;">
+                                <label for="orderTableNumber" style="display: block; margin-bottom: 5px; font-weight: 500;">Table No.</label>
+                                <input type="text" id="orderTableNumber" required placeholder="Click to reserve table" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background-color: #f9f9f9;" onclick="sessionStorage.setItem('returnToCart', 'true'); window.location.href='reservation.html';">
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label for="orderArrivalTime" style="display: block; margin-bottom: 5px; font-weight: 500;">Arrival Time</label>
+                                <input type="time" id="orderArrivalTime" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-large btn-full" onclick="placeOrder()">
+                        <i class="fas fa-check"></i> Place Order
+                    </button>
+                    <a href="menu.html" class="btn btn-secondary btn-full">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Confirmation Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-check-circle"></i>
+                <h2>Order Placed Successfully!</h2>
+            </div>
+            <div class="modal-body">
+                <p>Thank you for your order. Your food will be prepared shortly.</p>
+                <div class="order-details" id="orderDetails">
+                    <!-- Order details will be populated by JavaScript -->
+                </div>
+                <p class="order-note">You can view your order status in the admin dashboard.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="index.html" class="btn btn-primary">Back to Home</a>
+                <a href="menu.html" class="btn btn-secondary">Order More</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Lumina Bite</h3>
+                    <p>Your favorite place for coffee and good food</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="reservation.html">Reservations</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Coffee Street, City</p>
+                    <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                    <p><i class="fas fa-envelope"></i> info@cafeqoder.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Hours</h3>
+                    <p>Mon - Fri: 7:00 AM - 10:00 PM</p>
+                    <p>Sat - Sun: 8:00 AM - 11:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Lumina Bite. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
